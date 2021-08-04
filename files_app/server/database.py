@@ -1,6 +1,8 @@
+import os
+
 import motor.motor_asyncio
 
-MONGO_DETAILS = "mongodb://localhost:27017"
+MONGO_DETAILS = os.environ.get('MONGO_URL')
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
