@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from files_app.server.database import student_collection
+from files_app.server.database import reports_collection
 
 
 def report_helper(report) -> dict:
@@ -12,12 +12,12 @@ def report_helper(report) -> dict:
 
 async def retrieve_reports():
     reports = []
-    async for report in student_collection.find():
+    async for report in reports_collection.find():
         reports.append(report_helper(report))
     return reports
 
 
 async def add_report(report_data: dict) -> dict:
-    student = await student_collection.insert_one(report_data)
-    new_student = await student_collection.find_one({"_id": student.inserted_id})
+    student = await reports_collection.insert_one(report_data)
+    new_student = await reports_collection.find_one({"_id": student.inserted_id})
     return report_helper(new_student)
