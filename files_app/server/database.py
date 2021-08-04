@@ -1,11 +1,11 @@
 import os
 
-import motor.motor_asyncio
+import pymongo
 
-MONGO_DETAILS = os.environ.get('MONGO_URL')
+MONGO_URL = os.environ.get('MONGO_URL')
 
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
+client = pymongo.MongoClient(MONGO_URL)
 
 database = client.reports
 
-reports_collection = database.get_collection("weather_reports_collection")
+reports_collection = database["weather_reports_collection"]
